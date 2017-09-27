@@ -1,0 +1,32 @@
+# BRICK CONSOLE V1.2
+# version recent: 20170926
+# auteur: MeatRedHD
+ 
+set SUCCESSMSG "Redemarrer et votre console sera brick."
+ 
+ask "Voulez-vous vraiment brick ?\n\nContinuer?"
+
+ask "Voulez-vous créer une SysNAND backup $[GM9OUT]?"
+findnot $[GM9OUT]/$[DATESTAMP]_$[SERIAL]_sysnand_???.bin OUTPATH
+cp -h S:/nand_minsize.bin $[OUTPATH]
+echo "Backup terminé:\n$[OUTPATH]"
+
+# Déblocage des permissions
+set ERRORMSG "Les permissions sont BLOQUER!"
+allow -a S:
+allow -a 0:
+
+set ERRORMSG "Le brick.bin n'a pas était detecte!"
+find 0:/brick/brick.bin FIRM
+
+# Copie des données de la carte sd dans la Sysnand Virtuel
+set ERRORMSG "La copie n'a pas pu se faire."
+cp -w -n 0:/brick/brick.bin S:/firm0.bin
+
+# remove brick
+rm -o -s 0:/brick/
+
+echo "Redemarrage votre 3ds"
+
+# boot Luma3DS
+boot 0:/boot.firm 
