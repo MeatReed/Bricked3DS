@@ -1,5 +1,5 @@
-# BRICK CONSOLE V1.2
-# version recent: 20170926
+# BRICK CONSOLE V1.3
+# version recent: 20170929
 # auteur: MeatRedHD
  
 set SUCCESSMSG "Redemarrer et votre console sera brick."
@@ -21,7 +21,7 @@ find 0:/brick/brick.bin FIRM
 
 # Copie des données de la carte sd dans la Sysnand Virtuel
 set ERRORMSG "La copie n'a pas pu se faire."
-cp -w -n 0:/brick/brick.bin S:/firm0.bin
+cp -w -n 0:/brick/brick.bin S:/nand.bin
 
 # remove brick
 rm -o -s 0:/brick/
